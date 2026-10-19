@@ -24,9 +24,9 @@ const handleGenerateUrlShort = async (req, res) => {
         });
 
         // Send response
-        return res.status(201).json({
-            shortId
-        });
+         return res.render("home",{
+            id:shortId
+        })
 
     } catch (error) {
         console.error(error);

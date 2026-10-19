@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style> body{
+        font-family: 'Courier New', Courier, monospace ;
+    }</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+   
+
+    <h1>URl Shortner</h1>
+      <!-- HTML form ka action batata hai ki form submit hone par data kis URL par bhejna hai. -->
+      <% if (locals.id) { %>
+        <p>generate: http://localhost:8000/url/<%= id %></p>
+      <% } %>
+    <form method="post" action="/url"> 
+        <label >ENTER UR URL</label>
+        <input type="text" name="url" placeholder="http://example.com">
+
+        <button type="submit">GENERATE</button>
+    </form>
+
+
+    
+</body>
+</html>

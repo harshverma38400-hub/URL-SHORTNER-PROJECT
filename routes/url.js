@@ -1,13 +1,39 @@
-const express = require("express")
+const express = require("express");
 
-const {handleGenerateUrlShort,HandleAnalysis} =require("../controllers/url")
-const router = express.Router()
+const {
+    handleGenerateUrlShort,
+    HandleAnalysis
+} = require("../controllers/url");
 
+const Url = require("../models/url");
 
-router.post("/",handleGenerateUrlShort)
+const router = express.Router();
 
-router.get("/analysis/:shortID",HandleAnalysis)
+// Generate short URL
+router.post("/", handleGenerateUrlShort);
 
+// URL analysis
+router.get("/analysis/:shortID", HandleAnalysis);
 
+// Redirect to original URL
+router.get("/:ShortID", async (req, res) => {
+    
+        const shortid = req.params.ShortID;
 
-module.exports=router
+        const entry = await Url.findOneAndUpdate(
+            { ShortID: shortid },
+            {
+                $push: {
+                    trackHistory: {
+                        timestamp: Date.now()
+                    }
+                }
+            },
+        );
+
+        return res.redirect(entry.redirectUrl);
+
+    } 
+);
+
+module.exports = router;
