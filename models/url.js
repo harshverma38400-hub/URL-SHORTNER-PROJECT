@@ -11,7 +11,7 @@ const { default: mongoose } = require("mongoose")
         type:String,
         required:true
     },
-    // it just tell about how many it will be click
+    // it just tell about how many it will be clicked
     
      trackHistory:[{timestamp:{ type:Number}}]
      

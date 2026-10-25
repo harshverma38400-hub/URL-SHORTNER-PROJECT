@@ -9,9 +9,13 @@ const path = require("path")
 
 const {connector}= require("./connecter/MongoConnect")
 
+//Routes
 const urlRoute =require("./routes/url")
 
 const StaticRoute =require("./routes/StaticRoute")
+
+const UsersRoute = require("./routes/userofAuth")
+
 
 const Url = require("./models/url");
 
@@ -33,6 +37,10 @@ app.use("/url",urlRoute)
 //staticRoute 
 
 app.use('/',StaticRoute)
+
+// UserRouter
+
+app.use("/users",UsersRoute)
 
 // we telling here which view engine we are using which ejs ,pug etc koi sa bhi ho sakta hai , kese use krna hai ejs ko btata hai
 app.set("view engine","ejs")

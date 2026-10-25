@@ -23,6 +23,7 @@ router.get("/:ShortID", async (req, res) => {
         const entry = await Url.findOneAndUpdate(
             { ShortID: shortid },
             {
+                //MongoDB mein $push ka use array ke andar naya element add karne ke liye hota hai.
                 $push: {
                     trackHistory: {
                         timestamp: Date.now()
@@ -30,7 +31,7 @@ router.get("/:ShortID", async (req, res) => {
                 }
             },
         );
-
+        //Ab Express browser ko redirect response bhejta hai, jisme original URL par jaane ka instruction hota hai.
         return res.redirect(entry.redirectUrl);
 
     } 
