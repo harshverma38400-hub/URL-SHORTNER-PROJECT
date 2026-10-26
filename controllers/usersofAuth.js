@@ -28,10 +28,12 @@ const HandleLogin =async(req,res)=>{
     }
 
 
-    const SessionId =uuidv4()
-    insertData(SessionId,Userss)
+    // const SessionId =uuidv4()
 
-    res.cookie("udv",SessionId)
+    //insertData(SessionId,Userss)
+
+       const token =insertData(Userss)
+    res.cookie("udv",token)
 
   return res.redirect("/")
 

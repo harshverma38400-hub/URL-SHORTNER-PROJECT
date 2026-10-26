@@ -7,7 +7,7 @@ const RedtrictToLoginInUserOnly = (req, res, next) => {
     console.log("1. Session ID:", sessionId);
 
     if (!sessionId) {
-        console.log("Cookie nahi mili");
+       
         return res.redirect("/login");
     }
 
@@ -16,13 +16,10 @@ const RedtrictToLoginInUserOnly = (req, res, next) => {
     console.log("2. Retrieved User:", user);
 
     if (!user) {
-        console.log("Session ID se user nahi mila");
         return res.redirect("/login");
     }
 
     req.user = user;
-
-    console.log("3. Authentication successful");
 
     next();
 };

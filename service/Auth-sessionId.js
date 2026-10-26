@@ -19,7 +19,10 @@ const SecretKey = "harsh@46723"
 
 const insertData =(user)=>{
 
-    return jwt.sign(user,SecretKey)    
+    return jwt.sign({
+      _id:user._id,
+      user
+    },SecretKey)    
 
 }
 
