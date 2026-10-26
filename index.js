@@ -6,9 +6,14 @@ const express = require("express")
 
 const path = require("path")
 
+const cookieParser = require("cookie-parser")
+
 
 const {connector}= require("./connecter/MongoConnect")
 
+//middleware
+
+const {RedtrictToLoginInUserOnly} =require("./middleware/Auth-session")
 //Routes
 const urlRoute =require("./routes/url")
 
@@ -30,9 +35,10 @@ connector("mongodb://127.0.0.1:27017/harshi")
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser())
 
 // router
-app.use("/url",urlRoute)
+app.use("/url", RedtrictToLoginInUserOnly,urlRoute)
 
 //staticRoute 
 
@@ -48,31 +54,6 @@ app.set("view engine","ejs")
 // just telling ki mere file kha rakhi hai   , btaya hai ki views is folder m pda hai path k through
 
 app.set('views' , path.resolve('./views'))
-
-// app.get('/home' ,async (req,res)=>{
-//     const allUrl = await Url.find({})
-//     return res.render("home", {URLss:allUrl})
-// })
-
-
-// app.get("/:ShortID", async (req, res) => {
-//         const shortid = req.params.ShortID;
-
-//         const entry = await Url.findOneAndUpdate(
-//             { ShortID: shortid },
-//             {
-//                 $push: {
-//                     trackHistory: {
-//                         timestamp: Date.now()
-//                     }
-//                 }
-//             },
-           
-//         )
-
-
-//         return res.redirect(entry.redirectUrl); }   )
-
 
 
 app.listen(port,()=>{console.log("here we go again:",port)})
