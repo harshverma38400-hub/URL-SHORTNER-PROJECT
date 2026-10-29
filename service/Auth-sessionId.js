@@ -33,3 +33,5 @@ const RetriveTheData =(token)=>{
 
 
 module.exports={insertData,RetriveTheData}
+
+

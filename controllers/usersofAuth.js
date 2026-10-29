@@ -34,6 +34,9 @@ const HandleLogin =async(req,res)=>{
 
        const token =insertData(Userss)
     res.cookie("udv",token)
+    
+    // bearer
+    // return res.json({token})
 
   return res.redirect("/")
 
