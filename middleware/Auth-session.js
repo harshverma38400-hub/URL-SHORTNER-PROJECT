@@ -24,7 +24,29 @@ const RedtrictToLoginInUserOnly = (req, res, next) => {
     next();
 };
 
-module.exports = { RedtrictToLoginInUserOnly };
+
+// Authorization
+
+//role like Admin And Memeber etc
+const restrictTo =(role=[])=>{
+  
+    return function(req,res,next){
+         // agar tum loged  in nhi to to vapas logged in page p chla jayo ga
+         console.log(req.user);
+         
+        if(!req.user){
+            return res.redirect("login")
+        }
+        //user ka role kya hia  include use to find inside the Array
+        if(!role.includes(req.user.role)){
+            return res.end("unAuthorized")
+        }
+        return next();
+    } 
+   
+}
+
+module.exports = { RedtrictToLoginInUserOnly ,restrictTo};
 
 
 

@@ -13,7 +13,7 @@ const {connector}= require("./connecter/MongoConnect")
 
 //middleware
 
-const {RedtrictToLoginInUserOnly} =require("./middleware/Auth-session")
+const {RedtrictToLoginInUserOnly,restrictTo} =require("./middleware/Auth-session")
 //Routes
 const urlRoute =require("./routes/url")
 
@@ -36,9 +36,15 @@ connector("mongodb://127.0.0.1:27017/harshi")
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser())
+//app.use(RedtrictToLoginInUserOnly)
 
 // router
-app.use("/url", RedtrictToLoginInUserOnly,urlRoute)
+app.use(
+    "/url",
+    RedtrictToLoginInUserOnly,
+    restrictTo(["NORMAL"]),
+    urlRoute
+);
 
 //staticRoute 
 

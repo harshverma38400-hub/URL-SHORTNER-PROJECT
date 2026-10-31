@@ -1,14 +1,16 @@
 //its is only for display
 
 const express = require("express")
+const {RedtrictToLoginInUserOnly}=require("../middleware/Auth-session")
 
 const router = express.Router()
 const fs =require('fs')
-
-router.get('/',(req,res)=>{
-
-    return res.render('home')
-})
+const { restrictTo } = require("../middleware/Auth-session")
+router.get( "/",RedtrictToLoginInUserOnly,restrictTo(["NORMAL"]),
+    (req, res) => {
+        return res.render("home");
+    }
+);
 
 
 router.get("/signup",(req,res)=>{
